@@ -1,0 +1,133 @@
+# obs2pdf built-in defaults.
+#
+# This file ships with the package and documents every setting obs2pdf
+# understands. Don't edit it — override any key instead in (lowest to
+# highest precedence):
+#
+#   1. this file
+#   2. [templates.<name>] below (per-document-type defaults, built in)
+#   3. ~/.config/obs2pdf/config.toml           (run `obs2pdf config init`)
+#   4. a [profiles.<name>] table in that file   (--profile / default_profile)
+#   5. the note's own YAML frontmatter, under an `obs2pdf:` key or as flat
+#      dotted keys (`obs2pdf.minutes.chair: ...`, editable in Obsidian's
+#      Properties panel)
+#   6. command-line flags
+#
+# Tables merge key by key, so a profile only needs the keys it changes.
+
+# Document type: one of the built-in templates (notes, minutes, report,
+# letter, cheatsheet, handout) or a .typ file in ~/.config/obs2pdf/templates/.
+template = "notes"
+
+# Document title. Empty = the note's first "# H1", else the filename.
+title = ""
+
+# Who wrote it. `role` is appended to the author in page footers
+# ("Jane Doe, Secretary") but not in places that want a plain name
+# (letter sender, signature lines, PDF metadata).
+author = ""
+role = ""
+# Shown in the page header; a list of lines (a plain string also works).
+affiliation = []
+
+# Text language (ISO 639-1). Drives hyphenation, Typst's own localized
+# strings ("Contents", ...) and obs2pdf's (footer, minutes labels). obs2pdf
+# translates its own strings for "en" and "de"; others fall back to English.
+lang = "en"
+
+# Any Typst paper name: "a4", "us-letter", "a5", ...
+paper = "a4"
+
+# Image shown in the header (and on the report title page). Absolute path,
+# "~/..." or relative to the note. Empty = no logo.
+logo = ""
+
+# BibTeX/Hayagriva file for [@citekey] citations; a bibliography is
+# appended at the end of the document. Same path rules as `logo`.
+bibliography = ""
+
+# Table of contents. outline_depth = 0 means all heading levels.
+outline = false
+outline_depth = 0
+
+[theme]
+# Catppuccin flavor: latte, frappe, macchiato, mocha — or "none" for a plain
+# black-on-white page (skips the catppuccin package download).
+flavor = "macchiato"
+# Catppuccin accent for wiki-links, links, quote bars, rules.
+accent = "mauve"
+# White page and black body text even with a flavor set; headings, bold,
+# italic and the accent stay colored. With the default flavor, this also
+# switches to "latte", whose colors are made for light backgrounds. Set it
+# to false (or pass --no-print-friendly) for the flavor's own background.
+print_friendly = true
+# Accent color used when flavor = "none".
+fallback_color = "#1e66f5"
+
+[fonts]
+# Each entry is a font family name. Typst ships Libertinus Serif, New
+# Computer Modern and DejaVu Sans Mono, so these defaults work everywhere;
+# a missing font falls back to these with a warning.
+body = "Libertinus Serif"
+heading = ""              # empty = same as body
+mono = "DejaVu Sans Mono"
+# Body text size in points; headings, footnotes etc. scale with it. Each
+# template has its own default (see [templates.*] below).
+size = 10
+
+[contact]
+# Sender details for the letter template (and anything else that wants them).
+address = [] # lines, e.g. ["Example Street 1", "12345 Example City"]
+phone = ""
+email = ""
+web = ""
+
+[minutes]
+# Meeting metadata for the minutes template — usually set per note in
+# frontmatter. Dates written as YYYY-MM-DD are formatted per `lang`.
+date = ""
+time = ""
+location = ""
+# People (chair, minute_taker, and entries of present/absent/guests) are
+# plain names or wiki links with an optional role: "Treasurer [[Jane Doe]]",
+# "[[Jane Doe|Jane]]". A list where anyone has a role is set as name/role rows.
+# In YAML, quote an entry when text follows the link: "[[Jane Doe]] (guest)".
+chair = ""
+minute_taker = "" # empty = author
+present = []
+absent = []
+guests = []
+# Append a table of all unchecked "- [ ]" tasks found in the note.
+action_items = true
+# Append signature lines for the chair and the minute-taker.
+signatures = true
+
+[letter]
+# Recipient address, one line per entry.
+recipient = []
+subject = ""     # empty = the document title
+date = ""        # empty = today; YYYY-MM-DD is formatted per `lang`
+annotations = "" # e.g. "Registered mail" above the recipient
+# Reference line, e.g. { "Your ref" = "AB-12", "Customer no." = "4711" }
+reference_signs = {}
+closing = ""          # e.g. "Kind regards" — followed by space to sign and the author
+format = "DIN-5008-B" # or "DIN-5008-A"
+
+# ---------------------------------------------------------------------------
+# Per-template defaults. Applied on top of the defaults above, but below your
+# own config, profiles, frontmatter and flags, which still win.
+
+[templates.report]
+outline = true
+
+[templates.report.fonts]
+size = 11
+
+[templates.letter.theme]
+flavor = "none"
+
+[templates.cheatsheet.fonts]
+size = 8
+
+[templates.handout.fonts]
+size = 11.5

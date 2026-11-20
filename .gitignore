@@ -1,0 +1,24 @@
+# Python / uv
+__pycache__/
+*.py[cod]
+.venv/
+build/
+dist/
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# obs2pdf output: rendered examples, kept (--keep-typst) and leftover
+# temporary Typst sources
+examples/*.pdf
+examples/*.typ
+*.obs2pdf.typ
+
+# Editors and local tooling
+.idea/
+.vscode/
+.claude/
+*.swp
+.DS_Store

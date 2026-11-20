@@ -1,0 +1,67 @@
+# obs2pdf user configuration — ~/.config/obs2pdf/config.toml
+#
+# Everything here is optional: any key left out falls back to obs2pdf's
+# built-in defaults (`obs2pdf config show` prints the resolved values and
+# where each one came from). The full list of settings, with explanations,
+# is in defaults.toml in the obs2pdf package:
+# https://github.com/p-e-n-t-h-a/obs2pdf/blob/main/src/obs2pdf/defaults.toml
+#
+# Precedence, lowest to highest:
+#   built-in defaults < built-in per-template defaults < this file
+#   < the selected [profiles.<name>] < the note's frontmatter
+#   < command-line flags
+
+# Profile used when neither --profile nor the note's frontmatter picks one.
+# default_profile = "work"
+
+# --- Global settings (apply to every profile) -----------------------------
+
+# author = "Jane Doe"
+# lang = "en"
+
+# [theme]
+# flavor = "macchiato"      # latte | frappe | macchiato | mocha | none
+# accent = "mauve"
+# print_friendly = false    # default true: white page, colored headings
+
+# [fonts]
+# body = "Nunito"
+# mono = "JetBrains Mono"
+# size = 10                 # body text size in pt (default depends on template)
+
+# --- Profiles: one per context you write in --------------------------------
+#
+# A profile is a partial config, selected with `obs2pdf -p <name> note.md`
+# or `obs2pdf: { profile: <name> }` in a note's frontmatter. It can set any
+# setting, including its own default `template` and nested tables.
+
+# [profiles.work]
+# author = "Jane Doe"
+# role = "M. Sc."
+# affiliation = ["Example University", "Institute of Examples"]
+# lang = "en"
+# template = "report"
+# logo = "~/.config/obs2pdf/assets/university.png"
+#
+# [profiles.work.theme]
+# fallback_color = "#00c1d4"
+
+# [profiles.club]
+# author = "Jane Doe"
+# role = "Secretary"
+# affiliation = ["Example Sports Club e.V."]
+# lang = "de"
+# template = "minutes"
+#
+# [profiles.club.contact]
+# address = ["Clubhouse Road 1", "12345 Example Town"]
+# email = "secretary@example.org"
+#
+# [profiles.club.minutes]
+# chair = "John Roe"
+
+# --- Your own templates ----------------------------------------------------
+#
+# Any .typ file in ~/.config/obs2pdf/templates/ becomes a template of the
+# same name (a file named like a built-in one replaces it). Start from a
+# copy of a built-in template, e.g. notes.typ, from the obs2pdf package.

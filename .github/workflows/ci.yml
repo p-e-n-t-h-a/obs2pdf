@@ -1,0 +1,55 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ["3.10", "3.11", "3.12", "3.13", "3.14"]
+    steps:
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v10
+      - run: uv run --python ${{ matrix.python }} pytest
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v10
+      - run: uv run ruff check
+      - run: uv run ruff format --check
+      - name: Build sdist and wheel
+        run: uv build
+
+  render-examples:
+    # Compiles every example note end to end with the real pandoc and typst,
+    # using only the built-in defaults, on the oldest supported and the
+    # latest Typst.
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        typst: ["0.13", "latest"]
+    steps:
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v10
+      - uses: pandoc/actions/setup@v1
+      - uses: typst-community/setup-typst@v5
+        with:
+          typst-version: ${{ matrix.typst }}
+      - name: Render examples
+        run: make -C examples
+      - uses: actions/upload-artifact@v7
+        with:
+          name: example-pdfs-typst-${{ matrix.typst }}
+          path: examples/*.pdf
