@@ -38,8 +38,9 @@ lang = "en"
 # Any Typst paper name: "a4", "us-letter", "a5", ...
 paper = "a4"
 
-# Image shown in the header (and on the report title page). Absolute path,
-# "~/..." or relative to the note. Empty = no logo.
+# Image shown in the header (and on the report title page, and in the
+# letterhead of letters). Absolute path, "~/..." or relative to the note.
+# Empty = no logo.
 logo = ""
 
 # BibTeX/Hayagriva file for [@citekey] citations; a bibliography is
