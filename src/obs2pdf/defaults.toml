@@ -108,6 +108,7 @@ signatures = true
 recipient = []
 subject = ""     # empty = the document title
 date = ""        # empty = today; YYYY-MM-DD is formatted per `lang`
+location = ""    # place put before the date: "Example City, 10 December 2026"
 annotations = "" # e.g. "Registered mail" above the recipient
 # Reference line, e.g. { "Your ref" = "AB-12", "Customer no." = "4711" }
 reference_signs = {}

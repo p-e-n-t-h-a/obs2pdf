@@ -6,6 +6,7 @@ obs2pdf.letter.recipient:
   - Main Street 1
   - 12345 Example City
 obs2pdf.letter.date: 2026-12-10
+obs2pdf.letter.location: Example City
 obs2pdf.letter.reference_signs.Your ref: AB-12
 obs2pdf.letter.reference_signs.Our ref: XY-34
 obs2pdf.letter.closing: Kind regards

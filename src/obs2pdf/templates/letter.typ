@@ -12,6 +12,7 @@
 //     letter:
 //       recipient: [Example Corp., Jane Roe, Main Street 1, 12345 Example City]
 //       subject: Your offer of 1 November     # default: the note's title
+//       location: Example City                # "Example City, <date>"
 //       reference_signs: { Your ref: AB-12 }
 //       closing: Kind regards
 //   ---
@@ -70,7 +71,10 @@
   recipient: obs2pdf-lines(obs2pdf-letter.recipient),
   annotations: if obs2pdf-letter.annotations != "" { obs2pdf-letter.annotations },
   reference-signs: obs2pdf-letter.reference_signs.pairs().map(((key, value)) => ([#key], [#value])),
-  date: if obs2pdf-letter.date != "" { obs2pdf-format-date(obs2pdf-letter.date) } else { obs2pdf-today },
+  date: {
+    let date = if obs2pdf-letter.date != "" { obs2pdf-format-date(obs2pdf-letter.date) } else { obs2pdf-today }
+    if obs2pdf-letter.location != "" { [#obs2pdf-letter.location, #date] } else { date }
+  },
   subject: if obs2pdf-letter.subject != "" {
     obs2pdf-letter.subject
   } else if obs2pdf-cfg.title != "" {

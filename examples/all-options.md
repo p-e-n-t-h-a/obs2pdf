@@ -85,6 +85,7 @@ obs2pdf.letter.recipient:
   - 12345 Example City
 obs2pdf.letter.subject: ""            # empty = the document title
 obs2pdf.letter.date: ""               # empty = today
+obs2pdf.letter.location: Example City # put before the date: "Example City, <date>"
 obs2pdf.letter.annotations: Registered mail
 # Reference line: free-form labels after `reference_signs.` (dots allowed).
 obs2pdf.letter.reference_signs.Your ref: AB-12
