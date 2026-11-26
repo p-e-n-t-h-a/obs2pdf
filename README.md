@@ -66,7 +66,7 @@ each one on the notes in [`examples/`](examples/).
 | `notes` (default) | everyday notes | two columns, numbered headings, header/footer |
 | `minutes` | meeting minutes | agenda items ("TOP 1" / "Item 1"), meeting-details block, open-task table, signature lines |
 | `report` | papers, documentation | title page, table of contents, one chapter per page, bibliography |
-| `letter` | formal letters | DIN 5008 via [letter-pro](https://typst.app/universe/package/letter-pro), sender from your profile |
+| `letter` | formal letters | DIN 5008 via [letter-pro](https://typst.app/universe/package/letter-pro), sender from your profile; `letter.style: fancy` adds a Catppuccin color stripe and a tinted letterhead |
 | `cheatsheet` | reference sheets | landscape, three columns, dense type |
 | `handout` | flyers, info sheets, player handouts | single column, large type, no header/footer |
 
@@ -150,6 +150,7 @@ obs2pdf:
     recipient: [Example Corp., Attn. Jane Roe, Main Street 1, 12345 Example City]
     reference_signs: { "Your ref": "AB-12" }
     closing: Kind regards
+    style: fancy   # optional: color stripe, letterhead with logo, role and contact details
 ---
 ```
 

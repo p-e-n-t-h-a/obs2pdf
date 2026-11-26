@@ -129,6 +129,7 @@ def test_missing_file_setting_is_an_error(fake_tools, tmp_path):
         ({"theme": {"flavor": "dark"}}, "unknown catppuccin flavor"),
         ({"theme": {"accent": "purple"}}, "unknown catppuccin accent"),
         ({"outline_depth": -1}, "outline_depth"),
+        ({"letter": {"style": "posh"}}, "unknown letter style"),
     ],
 )
 def test_invalid_settings_are_rejected(overrides, message, fake_tools, tmp_path):

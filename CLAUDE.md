@@ -53,7 +53,8 @@ src/obs2pdf/
     _theme.typ        # Catppuccin color resolution
     _base.typ         # settings loading, i18n strings, fonts, obs2pdf-base page/show rules, hooks
     notes.typ minutes.typ report.typ letter.typ cheatsheet.typ handout.typ
-examples/             # one demo note per template + all-options.md (every frontmatter key)
+examples/             # one demo note per template, letter-fancy.md (letter.style = "fancy"),
+                      # all-options.md (every frontmatter key)
 ```
 
 ### Settings: three separate concerns
@@ -114,6 +115,12 @@ fallback dict in `_base.typ`; nothing else in Python needs to know about it.
   `flipped`, `text-size` (default `auto` = `fonts.size`), `heading-numbering`), then only what's specific to that document type.
   Template-specific defaults (report → outline on + 11pt, letter → no theme, cheatsheet → 8pt,
   handout → 11.5pt) go in `[templates.<name>]` in `defaults.toml`, not in the `.typ`.
+- **`letter.style = "fancy"`** keeps letter-pro's DIN layout (it owns margins, folding marks in
+  the page `background`, and the footer, whose page-number line is replaced via
+  `page-numbering`) and adds the stripe as page `foreground`, a running `header`, and its own
+  header box. It loads the catppuccin package itself, with Latte when `theme.flavor` is `none`
+  (the letter default), and takes *every* color from that palette (body text `subtext1`, band `crust`,
+  secondary text `overlay1`, ...) rather than from `obs2pdf-theme`, matching a Catppuccin CV design.
 - **i18n**: obs2pdf's own UI strings and date formats are in `obs2pdf-strings` /
   `obs2pdf-date-formats` in `_base.typ` (`en`, `de`; others fall back to `en`). Use `obs2pdf-t(key)`.
   Date formats are functions `datetime -> str`, since Typst's `[month repr:long]` is English-only.
@@ -137,3 +144,7 @@ fallback dict in `_base.typ`; nothing else in Python needs to know about it.
   *function* (see `minutes.typ`), not the pattern string `"Item 1"`.
 - A later `#show: f` wraps everything after it, *inside* earlier show rules — that's how
   `letter.typ` and `minutes.typ` append content (closing, signatures) after the note body.
+- `measure` inside `layout` didn't pick up the bold that letter-pro's `strong(subject)` puts
+  *around* it, so text measured narrower than rendered; set such styles inside the measured
+  content (see `obs2pdf-letter-balanced`). Content built from `layout`/`context` also has no
+  plain text, so it can't double as a PDF title.

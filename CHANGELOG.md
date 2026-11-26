@@ -11,7 +11,8 @@ First public release.
 - Converts Obsidian notes to PDF via Pandoc (Markdown → Typst) and Typst:
   wiki links, embeds and transclusions (searched across the vault),
   highlights, comments, task lists, citations.
-- Six document types: `notes`, `minutes`, `report`, `letter` (DIN 5008),
+- Six document types: `notes`, `minutes`, `report`, `letter` (DIN 5008, plain or with a
+  Catppuccin `fancy` letterhead),
   `cheatsheet`, `handout`; your own templates in
   `~/.config/obs2pdf/templates/`.
 - Layered configuration: built-in defaults, per-template defaults,

@@ -114,6 +114,13 @@ annotations = "" # e.g. "Registered mail" above the recipient
 reference_signs = {}
 closing = ""          # e.g. "Kind regards" — followed by space to sign and the author
 format = "DIN-5008-B" # or "DIN-5008-A"
+# "din": the plain DIN 5008 layout. "fancy": the same layout with a
+# Catppuccin color stripe along the top, a tinted letterhead (logo, author,
+# role, contact details) and running header/footer on later pages. Fancy
+# always uses Catppuccin colors, the body text included: Latte if
+# theme.flavor is "none", otherwise that flavor, with theme.accent as the
+# highlight color.
+style = "din"
 
 # ---------------------------------------------------------------------------
 # Per-template defaults. Applied on top of the defaults above, but below your

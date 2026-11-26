@@ -58,7 +58,7 @@
   ),
   letter: (
     recipient: (), subject: "", date: "", location: "", annotations: "",
-    reference_signs: (:), closing: "", format: "DIN-5008-B",
+    reference_signs: (:), closing: "", format: "DIN-5008-B", style: "din",
   ),
 )
 

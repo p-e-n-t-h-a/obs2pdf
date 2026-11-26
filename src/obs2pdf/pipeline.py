@@ -40,6 +40,7 @@ from .vault import find_vault_root
 # Settings that name a file; resolved relative to the note and passed to
 # Typst as paths relative to the compile root.
 FILE_SETTINGS = ("logo", "bibliography")
+LETTER_STYLES = ("din", "fancy")
 
 
 def read_note(path: str) -> tuple[dict[str, Any], str]:
@@ -86,6 +87,9 @@ def validate(settings: dict[str, Any]) -> None:
         raise ValueError(
             f"unknown catppuccin accent {accent!r}; choose one of {CATPPUCCIN_ACCENTS}"
         )
+    style = settings["letter"]["style"]
+    if style not in LETTER_STYLES:
+        raise ValueError(f"unknown letter style {style!r}; choose one of {LETTER_STYLES}")
     depth = settings["outline_depth"]
     if not isinstance(depth, int) or isinstance(depth, bool) or depth < 0:
         raise ValueError(f"outline_depth must be a non-negative integer, got {depth!r}")

@@ -92,6 +92,7 @@ obs2pdf.letter.reference_signs.Your ref: AB-12
 obs2pdf.letter.reference_signs.Customer no.: "4711"
 obs2pdf.letter.closing: Kind regards
 obs2pdf.letter.format: DIN-5008-B     # or DIN-5008-A
+obs2pdf.letter.style: din             # or fancy: color stripe + tinted letterhead
 ---
 # Frontmatter Reference
 
