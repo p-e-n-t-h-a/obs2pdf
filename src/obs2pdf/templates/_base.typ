@@ -250,6 +250,10 @@
   show outline.entry.where(level: 2): set text(style: "italic")
   show outline.entry.where(level: 3): set text(size: 0.9em)
   show figure: set text(size: 0.8em)
+  // Pandoc wraps every table in a figure, and figures don't break across
+  // pages by default: a long table would be pushed onto its own page and
+  // overflow it. Let it break; `table.header` rows repeat on each page.
+  show figure.where(kind: table): set block(breakable: true)
   show: checklist
 
   body
